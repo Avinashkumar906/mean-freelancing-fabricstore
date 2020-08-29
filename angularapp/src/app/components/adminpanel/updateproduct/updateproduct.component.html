@@ -1,0 +1,55 @@
+<div class="container-fluid py-4">
+    <div class="row">
+        <h2 class="h2 w-100 text-center mb-3">Manage Product</h2>
+        <div class="col-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Variation</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="8">Out of stock</th>
+                    </tr>
+                    <tr *ngFor="let product of ostList;let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{product.name}}</td>
+                        <td>{{product.type}}</td>
+                        <td>Out&nbsp;of&nbsp;stock</td>
+                        <td class="text-right">{{product.cost}}&nbsp;&euro;</td>
+                        <td><span class="mr-2" *ngFor="let color of product.colors">#{{color}}</span></td>
+                        <td><span class="btn btn-sm btn-danger" (click)="updateProduct(product)">Update</span></td>
+                        <td><span class="btn btn-sm btn-danger" (click)="delete(product)">Delete</span></td>
+                    </tr>
+                    <tr *ngIf="ostList.length == 0">
+                        <td colspan="8" class="text-center"><span>No products are out of stock</span></td>
+                    </tr>
+                    <tr>
+                        <th colspan="8">In stock</th>
+                    </tr>
+                    <tr *ngFor="let product of productList;let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{product.name}}</td>
+                        <td>{{product.type}}</td>
+                        <td>{{product.quantity}}&nbsp;Mtr</td>
+                        <td class="text-right">{{product.cost}}&nbsp;&euro;</td>
+                        <td><span class="mr-2" *ngFor="let color of product.colors">#{{color}}</span></td>
+                        <td><span class="btn btn-sm btn-danger" (click)="updateProduct(product)">Update</span></td>
+                        <td><span class="btn btn-sm btn-danger" (click)="delete(product)">Delete</span></td>
+                    </tr>
+                    <tr *ngIf="productList.length == 0">
+                        <td colspan="8" class="text-center"><span>No products are in stock</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

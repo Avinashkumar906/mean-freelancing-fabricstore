@@ -1,0 +1,58 @@
+<div class="container py-4" *ngIf="user && user.role === 'admin'">
+    <div class="row">
+        <div class="col-sm-6 p-2">
+            <div class="bg-light text-center text-dark mx-auto my-2 p-4" style="max-width: 500px; min-height: 300px;">
+                <div class="center">
+                    <h2 class="h2"> Want to add new Fabric?</h2>
+                    <button class="m-2 btn btn-primary btn-lg" type="button" (click)="addProduct()">add Fabric!</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 p-2">
+            <div class="bg-light text-center text-dark mx-auto my-2 p-4" style="max-width: 500px; min-height: 300px;">
+                <div class="center">
+                    <h2 class="h2"> Want to manage Fabric?</h2>
+                    <button class="m-2 btn btn-primary btn-lg" type="button" (click)="updateProduct()">manage Fabric!</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 p-2">
+            <div class="bg-light text-center text-dark mx-auto my-2 p-4" style="max-width: 500px; min-height: 300px;">
+                <div class="center">
+                    <h2 class="h2"> Want to manage Users?</h2>
+                    <button class="m-2 btn btn-primary btn-lg" type="button" (click)="manageUser()">manage user!</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 p-2">
+            <div class="bg-light text-center text-dark mx-auto my-2 p-4" style="max-width: 500px; min-height: 300px;">
+                <div class="center">
+                    <h2 class="h2"> Want to manage Orders?</h2>
+                    <button class="m-2 btn btn-primary btn-lg" type="button" (click)="manageOrder()">manage Orders!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <!-- Update product -->
+        <ngx-smart-modal #updateproduct identifier="updateproduct" [customClass]="'confirmation-modal'" [dismissable] = "false">
+            <app-updateproduct></app-updateproduct>
+        </ngx-smart-modal>
+    
+        <!-- Add/Update product modal -->
+        <ngx-smart-modal #addproduct identifier="addproduct" [customClass]="'confirmation-modal'" [dismissable] = "false">
+            <app-manage-product></app-manage-product>
+        </ngx-smart-modal>
+    
+        <!-- Manage user modal -->
+        <ngx-smart-modal #manageuser identifier="manageuser" [customClass]="'confirmation-modal'" [dismissable] = "false">
+            <app-manageuser></app-manageuser>
+        </ngx-smart-modal>
+    
+        <!-- Manage Order modal -->
+        <ngx-smart-modal #manageorder identifier="manageorder" [customClass]="'confirmation-modal'" [dismissable] = "false">
+            <app-manage-order></app-manage-order>
+        </ngx-smart-modal>
+    </div>
+</div>

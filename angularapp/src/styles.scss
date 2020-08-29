@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "~ngx-smart-modal/ngx-smart-modal";
+// @import "app/app.component";
+
+.chip {
+    display: inline-block;
+    padding: 0 20px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #eeeeee;
+    cursor: pointer;
+    &:hover{
+        background: #cfcfcf;  
+    }
+  }
+  .chip.active{
+    background: #cfcfcf;
+}
+
+.confirmation-modal.nsm-dialog {
+    max-width: 1000px!important;
+}
+
+.btn{
+    border-radius: 30px!important;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    &:focus{
+        outline: none;
+        box-shadow: 5px 5px 15px rgba(0,0,0,.4);
+    }
+    &:hover{
+        outline: none;
+        box-shadow: 5px 5px 15px rgba(0,0,0,.4);
+    }
+}
+.btn-danger{
+    background-color: #d19592;
+    background-image: linear-gradient(315deg, #d19592 0%, #c81f70 74%);
+}
+.btn-primary{
+    outline: none;
+    border: none;
+    background-color: #3f0d12;
+    background-image: linear-gradient(315deg, #3f0d12 0%, #a71d31 74%);
+}

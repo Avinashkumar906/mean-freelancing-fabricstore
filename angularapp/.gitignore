@@ -1,15 +1,21 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/angularapp/dist
-/angularapp/tmp
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
 
 # dependencies
-/angularapp/node_modules
-/nodeserver/node_modules
+/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
 
 # IDEs and editors
-.idea
+/.idea
 .project
 .classpath
 .c9/

@@ -1,0 +1,29 @@
+<div class="container bg-light">
+    <div class="row">
+        <h4 class="h3 col-12 my-4 text-left" *ngIf="(productList | searchProduct:key).length > 0">All Products</h4>
+        <h4 class="h3 col-12 my-4 text-left" *ngIf="(productList | searchProduct:key).length == 0">No product found!
+        </h4>
+        <div class="col-12">
+            <div class="bg-dark" style="height: 2px;"></div>
+        </div>
+        <div class="col-12">
+            <div class="form-group my-4 mx-auto d-block w-auto" style="max-width: 400px;">
+                <input type="text" class="form-control" placeholder="Search product by name !" [(ngModel)]="key">
+            </div>
+        </div>
+        <hr />
+        <div class="col-lg-4 col-md-6" *ngFor="let item of productList | searchProduct:key;let i = index">
+            <div class="card my-2 d-block mx-auto" style="max-width: 20rem;">
+                <div class="w-100" style="height: 300px;overflow: hidden;">
+                    <img [src]='env.api+item.image' class="card-img-top w-auto" height="100%">
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="h4 card-title m-0" style="height: 56px;overflow: hidden;">{{item.name}}</h4>
+                    <p class="m-0">Available in {{item.colors.length}} colors !</p>
+                    <h6 class="h6 card-text">&euro; {{item.cost}}/meter</h6>
+                    <a class="btn btn-primary m-1" [routerLink]="['/fabric',item._id]">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container bg-light py-4" >
+    <div class="row" *ngIf="order && order.items.length > 0">
+        <div class="col-12">
+            <h2 class="h2 text-center my-4 pb-4"># INVOICE #</h2>
+        </div>
+        <div class="col-lg-4">
+            <div class="ml-3">
+                <span class="h4 d-block"><strong>Order By: </strong></span>
+                <p><strong>{{order.name}}<br/>({{order.email}})</strong> <br/></p>
+    
+                <span class="h4 d-block"><strong>Order Id: </strong></span>
+                <p><strong>{{order._id}}</strong></p>
+    
+                <span class="h4 d-block"><strong>Shipping Address : </strong></span>
+                <p><strong>{{order.address}}</strong> <br/></p>
+            </div>
+        </div> 
+        <div class="col-lg-8">
+            <h3>Lits of Items:</h3>
+            <table class="table" *ngIf="order.items.length != 0;">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Fabric</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of order.items;let i = index" class="text-center">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.selectedQuantity}}&nbsp;Mtr</td>
+                        <td>{{item.selectedColor}}</td>
+                        <td>{{item.cost}} &euro;/Mtr</td>
+                        <td>{{item.cost * item.selectedQuantity}} &euro;</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td colspan="5"></td>
+                        <td>Total :</td>
+                        <td>{{totalPrice()}} &euro;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 my-3 text-center">
+            <small class="text-muted"><em>**Note: in case of any discripency feel free to contact our support executive</em></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" *ngIf="err">
+            <h2 class="h2 text-center">No detail found for order</h2>
+            <p class="text-center">Order id : {{id}}</p>
+        </div>
+        <div class="col-12" *ngIf="!order && !err">
+            <h2 class="h2 text-center">Fetching order Detail</h2>
+            <div class="progress mt-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Order By</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Order Status</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Manage</th>                        
+                        <th scope="col">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="7">Placed</th>
+                    </tr>
+                    <tr *ngFor="let item of orderList | filter:'status':'placed'; let i = index" class="text-center">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.status}}</td>
+                        <td>{{totalPrice(item)}} &euro;</td>
+                        <td><span class="btn btn-primary" (click)="markCompleted(item)">complete</span></td>
+                        <td><span class="btn btn-primary" (click)="viewOrder(item)">View</span></td>
+                    </tr>
+                    <tr *ngIf="(orderList | filter:'status':'placed').length <= 0">
+                        <td colspan="7" class="text-center">No placed order</td>
+                    </tr>
+                    <tr>
+                        <th colspan="7">Completed</th>
+                    </tr>
+                    <tr *ngFor="let item of orderList | filter:'status':'completed'; let i = index" class="text-center">
+                        <th scope="row">{{i+1}}</th>
+                        <td>By{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.status}}</td>
+                        <td>{{totalPrice(item)}} &euro;</td>
+                        <td><span class="btn btn-danger" (click)="delete(item)">Delete</span></td>
+                        <td><span class="btn btn-primary" (click)="viewOrder(item)">View</span></td>
+                    </tr>
+                    <tr *ngIf="(orderList | filter:'status':'completed').length <= 0">
+                        <td colspan="7" class="text-center">No completed order</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container bg-light py-4">
+    <div class="row">
+        <div class="col-md-5">
+            <h2 class="h2">Search order by ID:</h2>
+            <div class="form-group my-4" style="max-width: 400px;">
+                <input type="text" class="form-control" placeholder="Search by order id!" [(ngModel)]="orderId">
+                <span class="btn btn-danger my-1" [routerLink]="['/orderdetail',orderId]">Search</span>
+            </div>
+        </div>
+        <div class="col-md-7" *ngIf="user;else noUser">
+            <h2 class="h2">Hi {{user && user?.name}}</h2>
+            <span class="btn btn-danger my-3" (click)="fetchOrders()">click to view recent orders:</span>
+            <!-- table view of recent orders -->
+            <table class="table my-1" *ngIf="orderList.length != 0;">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of orderList;let i = index" class="text-center">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{totalPrice(item)}} &euro;</td>
+                        <td><span class="btn btn-danger" [routerLink]="['/orderdetail',item._id]">View</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 *ngIf="noOrder">No recent order found !</h5>
+        </div>
+        <ng-template #noUser>
+            <div class="col-md-7">
+                <h2 class="h2">"Sign In, to view recent purchases"</h2>
+            </div>
+        </ng-template>
+    </div>
+</div>

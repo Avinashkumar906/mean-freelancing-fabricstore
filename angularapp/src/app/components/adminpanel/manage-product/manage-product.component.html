@@ -1,0 +1,80 @@
+<div class="d-block mx-auto py-2">
+    <form [formGroup]="productForm" (ngSubmit)="productForm.valid && submit()" class="d-block m-auto py-4" style="max-width: 720px;">
+        <h2 class="h2 text-center mb-3">{{ id ? "Update Product" : "Add Product"}}</h2>
+        <div class="row">
+            <div *ngIf="id" class="col-12 text-center" >
+                <img class="d-block mx-auto" style="max-height: 300px;" [src]='env.api + productForm.value.image'>
+            </div>
+            <div *ngIf="!id" class="col-sm-12">
+                <div class="form-group">
+                    <label>Add Image</label>
+                    <input type="file" (change)="handleFile($event)" class="form-control-file" placeholder="Fabric Title" >
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Fabric Title</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Fabric Title" >
+                    <small *ngIf="productFormControl.name.invalid && (productFormControl.name.touched && productFormControl.name.dirty)" class="form-text text-muted">Name must be 4 character long !</small>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Fabric Type</label>
+                    <input type="text" class="form-control" formControlName="type" placeholder="Fabric Type" >
+                    <small *ngIf="productFormControl.type.invalid && (productFormControl.type.touched && productFormControl.type.dirty)" class="form-text text-muted">Required !</small>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Price</label>
+                    <input type="number" class="form-control" formControlName="cost" placeholder="Fabric Price" >
+                    <small *ngIf="productFormControl.cost.invalid && (productFormControl.cost.touched && productFormControl.cost.dirty)" class="form-text text-muted">Required !</small>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Quantity</label>
+                    <input type="number" class="form-control" formControlName="quantity" placeholder="Quantity of Fabric" >
+                    <small *ngIf="productFormControl.quantity.invalid && (productFormControl.quantity.touched && productFormControl.quantity.dirty)" class="form-text text-muted">Required !</small>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group" formArrayName="colors">
+                    <label for="exampleInputEmail1">Add color option</label>
+                    <div class="my-1" >
+                        <span class="d-inline-block mr-1 px-3 py-2 bg-light" *ngFor="let item of colorArrayControl;let i =index">{{item.value}} 
+                            <span class="btn btn-sm btn-danger" (click)="removeColor(i)">X</span>
+                        </span>
+                    </div>
+                    <div class="d-flex">
+                        <input type="text" class="form-control" placeholder="Enter valid color and hit 'Add'" #color>
+                        <button type="button" class="mb-2 btn btn-danger" (click)="addColor(color)">Add</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Description</label>
+                    <textarea rows="4" class="form-control" formControlName="description" placeholder="Description" ></textarea>
+                    <small *ngIf="productFormControl.description.invalid && (productFormControl.description.touched && productFormControl.description.dirty)" class="form-text text-muted">Name must be 4 character long !</small>
+                </div>
+            </div>
+        </div>
+        <div class="text-center w-100">
+            <div *ngIf="message;else spinner">
+                <h5 class="h5 my-2 text-center">
+                    {{message}}
+                </h5>
+                <button type="submit" class="btn btn-primary mx-1" [disabled]="productForm.invalid">{{ id ? 'Update Product' : 'New Product'}}</button>
+                <button type="button" class="btn btn-danger mx-1" (click)="reset()">Reset</button>
+            </div>
+            <ng-template #spinner>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+                </div>
+            </ng-template>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,141 @@
+<div class="container bg-light py-4">
+    <div *ngIf="user; else noUser">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            1. Preview Order.
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <!-- preview order -->
+                        <table class="table" *ngIf="order.items.length != 0;else noItem">
+                            <thead class="thead-light">
+                                <tr class="text-center">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Fabric</th>
+                                    <th scope="col">In sock</th>
+                                    <th scope="col">Variation</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Remove</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of order.items;let i = index" class="text-center">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td><span [routerLink]="['/fabric',item._id]"
+                                            style="cursor: pointer;text-decoration: underline;">{{item.name}}</span>
+                                    </td>
+                                    <td *ngIf="item.quantity - item.selectedQuantity > 500">In stock</td>
+                                    <td *ngIf="item.quantity - item.selectedQuantity <= 500">
+                                        {{availableStoct(item.quantity,item.selectedQuantity)}}</td>
+                                    <td>{{item.selectedColor}}</td>
+                                    <td>{{item.cost}}&euro;/meter</td>
+                                    <td style="max-width: 50px;">
+                                        <div class="d-flex">
+                                            <input type="number" class="form-control h-50 text-right"
+                                                style="padding: 2px;" [(ngModel)]="item.selectedQuantity"
+                                                placeholder="Enter quantity" min="0" required />
+                                            <span> meter</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="btn btn-danger" (click)="remove(item)">Remove</span></td>
+                                    <td class="text-right" style="min-width: 100px;">
+                                        {{item.selectedQuantity > 0 && item.selectedQuantity <= item.quantity ? item.cost * item.selectedQuantity : 'NA'}}
+                                        &euro;</td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td colspan="5"></td>
+                                    <td><strong>Total Payable:</strong></td>
+                                    <td class="text-right" colspan="2"><strong>{{getTotal() > 0 ? getTotal() : 'NA'}}
+                                            &euro;</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ng-template #noItem>
+                            <div class="my-2 py2">
+                                <h3 class="h3 text-center">No Item In Cart!</h3>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="card" *ngIf="order.items.length != 0">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            2. Fill Shipping details
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <!-- checkout form -->
+                        <form [formGroup]="userForm" (ngSubmit)="userForm.valid && checkOut()">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="h2">
+                                        Checkout.
+                                    </h2>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">Name</label>
+                                        <input class="form-control" type="text" formControlName="name"
+                                            placeholder="Enter Name">
+                                        <small class="text-muted"
+                                            *ngIf="userFormControl.name.invalid && (userFormControl.name.touched && userFormControl.name.dirty)">Please
+                                            Enter Name!</small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">Email</label>
+                                        <input class="form-control" type="text" formControlName="email"
+                                            placeholder="Enter Email">
+                                        <small class="text-muted"
+                                            *ngIf="userFormControl.email.invalid && (userFormControl.email.touched && userFormControl.email.dirty)">Please
+                                            Enter Email!</small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Shipping address</label>
+                                        <textarea class="form-control" rows="3" formControlName="address"
+                                            placeholder="Enter Shipping address"></textarea>
+                                        <small class="text-muted"
+                                            *ngIf="userFormControl.address.invalid && (userFormControl.address.touched && userFormControl.address.dirty)">Enter
+                                            valid shipping address!</small>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="text-center" *ngIf="!submitted">
+                                        <button type="submit" class="btn btn-primary"
+                                            [disabled]="userForm.invalid">Place Order</button>
+                                    </div>
+                                    <div class="progress" *ngIf="submitted">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #noUser>
+        <div class="w-100 text-center my-4">
+            <div class="h2">Please Signin to place order !</div>
+            <span class="btn btn-danger" (click)="openSignIn()">Sign In!</span>
+        </div>
+    </ng-template>
+</div>

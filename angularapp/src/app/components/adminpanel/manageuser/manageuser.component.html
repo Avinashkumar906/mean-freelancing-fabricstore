@@ -1,0 +1,49 @@
+<div class="container-fluid py-4">
+    <div class="row">
+        <h2 class="h2 w-100 text-center mb-3">Manage Users</h2>
+        <div class="col-12">
+            <table class="table w-100">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Switch Role</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="6">Admin</th>
+                    </tr>
+                    <tr *ngFor="let user of userList | filter:'role':'admin' ;let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.role}}</td>
+                        <td><span class="btn btn-sm btn-danger" (click)="switchRole(user)">{{user.role === 'admin' ? 'make visitor': 'make admin'}}</span></td>
+                        <td><span class="btn btn-sm btn-danger" (click)="delete(user)">Delete</span></td>
+                    </tr>
+                    <tr *ngIf="(userList | filter:'role':'admin').length <= 0">
+                        <td colspan="6" class="text-center">No admin available</td>
+                    </tr>
+                    <tr>
+                        <th colspan="6">Visitor</th>
+                    </tr>
+                    <tr *ngFor="let user of userList | filter:'role':'visitor' ;let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.role}}</td>
+                        <td><span class="btn btn-sm btn-danger" (click)="switchRole(user)">{{user.role === 'admin' ? 'make visitor': 'make admin'}}</span></td>
+                        <td><span class="btn btn-sm btn-danger" (click)="delete(user)">Delete</span></td>
+                    </tr>
+                    <tr *ngIf="(userList | filter:'role':'visitor').length <= 0">
+                        <td colspan="6" class="text-center">No visitor available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<!-- <div class="h-100 w-100 adjust"> -->
+    <div class="h-100 adjust">
+        <div class="container">
+            <div class="text-dark bg-light text-center p-4 center">
+                <span class="h1 display-2 m-4">My Fabric My Way</span>
+                <p style="font-family: cursive;">A place for all kind of fabrics,</p>
+                <div class="my-2" *ngIf="!user;else logout">
+                    <p style="font-family: cursive;">New to our wesite signup here !</p>
+                    <!-- <span class="btn btn-success m-2" (click)="openSignIn()">Sign In</span> or  -->
+                    <span class="btn btn-success m-2" (click)="openSignUp()">Sign Up</span>
+                </div>
+                <ng-template #logout>
+                    <div class="my-2">
+                        <span class="btn btn-dark my-2 btn-lg" [routerLink]="['/fabric']">Shop</span> or
+                        <span class="btn btn-success my-2 btn-lg" (click)="logOut()">Logout</span>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
