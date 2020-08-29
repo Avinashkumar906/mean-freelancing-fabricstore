@@ -23,8 +23,8 @@
                         <td>{{item.email}}</td>
                         <td>{{item.status}}</td>
                         <td>{{totalPrice(item)}} &euro;</td>
-                        <td><span class="btn btn-primary" (click)="markCompleted(item)">complete</span></td>
-                        <td><span class="btn btn-primary" (click)="viewOrder(item)">View</span></td>
+                        <td><span class="btn btn-primary btn-sm" (click)="markCompleted(item)">complete</span></td>
+                        <td><span class="btn btn-primary btn-sm" (click)="viewOrder(item)">View</span></td>
                     </tr>
                     <tr *ngIf="(orderList | filter:'status':'placed').length <= 0">
                         <td colspan="7" class="text-center">No placed order</td>
@@ -38,8 +38,8 @@
                         <td>{{item.email}}</td>
                         <td>{{item.status}}</td>
                         <td>{{totalPrice(item)}} &euro;</td>
-                        <td><span class="btn btn-danger" (click)="delete(item)">Delete</span></td>
-                        <td><span class="btn btn-primary" (click)="viewOrder(item)">View</span></td>
+                        <td><span class="btn btn-danger btn-sm" (click)="delete(item)">Delete</span></td>
+                        <td><span class="btn btn-primary btn-sm" (click)="viewOrder(item)">View</span></td>
                     </tr>
                     <tr *ngIf="(orderList | filter:'status':'completed').length <= 0">
                         <td colspan="7" class="text-center">No completed order</td>

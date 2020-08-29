@@ -46,7 +46,7 @@
                                             <span> meter</span>
                                         </div>
                                     </td>
-                                    <td><span class="btn btn-danger" (click)="remove(item)">Remove</span></td>
+                                    <td><span class="btn btn-danger btn-sm" (click)="remove(item)">Remove</span></td>
                                     <td class="text-right" style="min-width: 100px;">
                                         {{item.selectedQuantity > 0 && item.selectedQuantity <= item.quantity ? item.cost * item.selectedQuantity : 'NA'}}
                                         &euro;</td>
@@ -70,7 +70,7 @@
             <div class="card" *ngIf="order.items.length != 0">
                 <div class="card-header" id="headingTwo">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             2. Fill Shipping details
                         </button>

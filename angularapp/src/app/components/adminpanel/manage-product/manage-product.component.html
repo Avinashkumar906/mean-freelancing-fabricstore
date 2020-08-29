@@ -44,12 +44,12 @@
                     <label for="exampleInputEmail1">Add color option</label>
                     <div class="my-1" >
                         <span class="d-inline-block mr-1 px-3 py-2 bg-light" *ngFor="let item of colorArrayControl;let i =index">{{item.value}} 
-                            <span class="btn btn-sm btn-danger" (click)="removeColor(i)">X</span>
+                            <span class="bg-dark text-light d-inline-block px-2" style="cursor: pointer;" (click)="removeColor(i)">X</span>
                         </span>
                     </div>
                     <div class="d-flex">
                         <input type="text" class="form-control" placeholder="Enter valid color and hit 'Add'" #color>
-                        <button type="button" class="mb-2 btn btn-danger" (click)="addColor(color)">Add</button>
+                        <button type="button" class="ml-2 mb-2 btn btn-danger" (click)="addColor(color)">Add</button>
                     </div>
                 </div>
             </div>
